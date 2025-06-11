@@ -422,6 +422,16 @@
       .search-container {
         max-width: none;
       }
+
+      .footer {
+        margin-top: 2rem;
+        padding: 1.5rem 0;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -437,6 +447,10 @@
 
       .card {
         padding: 1rem;
+      }
+
+      .footer-content {
+        font-size: 0.8rem;
       }
     }
 
@@ -472,6 +486,58 @@
     .mt-4 {
       margin-top: 2rem;
     }
+
+    /* Footer */
+    .footer {
+      margin-top: 4rem;
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.3s ease;
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-icon {
+      color: var(--accent-color);
+      margin-right: 0.25rem;
+    }
   </style>
 </head>
 <body>
@@ -484,6 +550,20 @@
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <i class="fas fa-code footer-icon"></i>
+        <span>Developed by</span>
+        <a href="https://www.yarif.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+          Yarif 2025
+        </a>
+        <i class="fas fa-heart footer-icon" style="color: #ef4444; margin-left: 0.5rem;"></i>
+      </div>
+    </div>
+  </footer>
 
   <div class="container">
     <!-- Loading State -->
