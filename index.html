@@ -3,149 +3,793 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DATA RTLH KAB KEDIRI </title>
+  <title>DATA RTLH KAB KEDIRI</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3e0.png">
+  
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary-color: #f1f5f9;
+      --accent-color: #06b6d4;
+      --success-color: #10b981;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border-color: #e2e8f0;
+      --white: #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
-      background-color: #f4f6f8;
+      font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--secondary-color) 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
     }
 
-    h1, h2 {
-      color: #2c3e50;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
     }
 
-    .search, .container {
-      margin-top: 20px;
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 2rem 0 3rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--white);
+      margin-bottom: 2rem;
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+      box-shadow: var(--shadow-lg);
     }
 
-    input[type="text"] {
-      padding: 10px;
+    .header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .breadcrumb {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-lg);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .breadcrumb i.fa-chevron-right {
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    .current-location {
+      font-weight: 600;
+    }
+
+    /* Search Section */
+    .search-section {
+      margin-bottom: 2rem;
+    }
+
+    .search-container {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .search-input {
       width: 100%;
-      max-width: 400px;
-      font-size: 16px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      padding: 1rem 1rem 1rem 3rem;
+      font-size: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
     }
 
-    .button {
-      margin: 5px;
-      padding: 10px 15px;
-      border: none;
-      background-color: #3498db;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+      transform: translateY(-1px);
     }
 
-    .button:hover {
-      background-color: #2980b9;
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 1.1rem;
     }
 
-    #kecamatanContainer, #desaContainer {
+    .search-label {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-color);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    @media (max-width: 600px) {
-      .button {
-        width: 100%;
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-success {
+      background: var(--success-color);
+      color: var(--white);
+    }
+
+    .btn-success:hover {
+      background: #059669;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin: 3rem 0 2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* Navigation Buttons */
+    .navigation-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-navigation {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--white);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: var(--radius-lg);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-navigation:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      background: linear-gradient(135deg, var(--primary-dark), #0891b2);
+    }
+
+    .btn-navigation i {
+      font-size: 1.1rem;
+    }
+
+    /* Back Button */
+    .back-button {
+      margin-bottom: 0;
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+      padding: 0.875rem 1.5rem;
+      border-radius: var(--radius-lg);
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-back:hover {
+      background: var(--white);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-secondary);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--border-color);
+    }
+
+    .section-info {
+      text-align: right;
+    }
+
+    .section-info small {
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* Count Badge */
+    .count-badge {
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0.75rem;
+      }
+
+      .header {
+        padding: 1.5rem 0 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .breadcrumb {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .navigation-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+
+      .section-info {
+        text-align: center;
+      }
+
+      .btn-navigation {
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .card {
+        padding: 1.25rem;
+      }
+
+      .section-header {
+        margin: 2rem 0 1.5rem;
+      }
+
+      .search-container {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .cards-grid {
+        gap: 0.75rem;
+      }
+
+      .card {
+        padding: 1rem;
+      }
+    }
+
+    /* Animation */
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Utility Classes */
+    .hidden {
+      display: none !important;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-2 {
+      margin-bottom: 1rem;
+    }
+
+    .mt-4 {
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-  <h1>Daftar RTLH Kabupaten Kediri</h1>
-
-  <div class="search">
-    <label for="searchKecamatan">Cari Kecamatan:</label>
-    <input type="text" id="searchKecamatan" placeholder="Ketik nama kecamatan...">
+  <div class="header">
+    <div class="container">
+      <h1><i class="fas fa-home"></i> Data RTLH Kabupaten Kediri</h1>
+      <p>Sistem Informasi Rumah Tidak Layak Huni</p>
+      <div class="breadcrumb" id="breadcrumb">
+        <i class="fas fa-home"></i> Kabupaten Kediri
+      </div>
+    </div>
   </div>
 
-  <div id="kecamatanContainer"></div>
+  <div class="container">
+    <!-- Loading State -->
+    <div class="loading" id="loadingState">
+      <div class="spinner"></div>
+      <p>Memuat data...</p>
+    </div>
 
-  <div class="search">
-    <label for="searchDesa">Cari Desa:</label>
-    <input type="text" id="searchDesa" placeholder="Ketik nama desa..." style="display:none;">
+    <!-- Main Content -->
+    <div id="mainContent" class="hidden">
+      <!-- Kecamatan Section -->
+      <div id="kecamatanSection">
+        <div class="search-section">
+          <div class="search-container">
+            <label class="search-label" for="searchKecamatan">
+              <i class="fas fa-map-marker-alt"></i> Cari Kecamatan
+            </label>
+            <div style="position: relative;">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" id="searchKecamatan" class="search-input" placeholder="Ketik nama kecamatan...">
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title">Pilih Kecamatan</h2>
+          <p class="section-subtitle">Klik kecamatan untuk melihat daftar desa</p>
+        </div>
+
+        <div id="kecamatanContainer" class="cards-grid"></div>
+      </div>
+
+      <!-- Desa Section -->
+      <div id="desaSection" class="hidden">
+        <div class="navigation-section">
+          <button class="btn btn-navigation" id="backButton">
+            <i class="fas fa-arrow-left"></i> 
+            Pilih Kecamatan Lain
+          </button>
+          
+          <div class="section-info">
+            <small class="text-muted">Klik desa untuk mengakses data RTLH</small>
+          </div>
+        </div>
+
+        <div class="search-section">
+          <div class="search-container">
+            <label class="search-label" for="searchDesa">
+              <i class="fas fa-building"></i> Cari Desa
+            </label>
+            <div style="position: relative;">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" id="searchDesa" class="search-input" placeholder="Ketik nama desa...">
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2 class="section-title" id="desaSectionTitle">Desa di Kecamatan</h2>
+          <p class="section-subtitle">Klik desa untuk mengakses data RTLH</p>
+        </div>
+
+        <div id="desaContainer" class="cards-grid"></div>
+      </div>
+    </div>
   </div>
-
-  <div id="desaContainer"></div>
 
   <script>
     let data = [];
     let currentKecamatan = '';
+    let filteredKecamatans = [];
+    let filteredDesas = [];
+
+    // DOM Elements
+    const loadingState = document.getElementById('loadingState');
+    const mainContent = document.getElementById('mainContent');
+    const kecamatanSection = document.getElementById('kecamatanSection');
+    const desaSection = document.getElementById('desaSection');
+    const searchKecamatan = document.getElementById('searchKecamatan');
+    const searchDesa = document.getElementById('searchDesa');
+    const kecamatanContainer = document.getElementById('kecamatanContainer');
+    const desaContainer = document.getElementById('desaContainer');
+    const backButton = document.getElementById('backButton');
+    const desaSectionTitle = document.getElementById('desaSectionTitle');
+
+    function showLoading() {
+      loadingState.classList.remove('hidden');
+      mainContent.classList.add('hidden');
+    }
+
+    function hideLoading() {
+      loadingState.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+    }
+
+    function showKecamatanSection() {
+      kecamatanSection.classList.remove('hidden');
+      desaSection.classList.add('hidden');
+      searchKecamatan.value = '';
+      currentKecamatan = '';
+      updateBreadcrumb();
+      renderKecamatanList(data);
+    }
+
+    function showDesaSection(kecamatan) {
+      kecamatanSection.classList.add('hidden');
+      desaSection.classList.remove('hidden');
+      desaSectionTitle.textContent = `Desa di Kecamatan ${kecamatan}`;
+      searchDesa.value = '';
+      currentKecamatan = kecamatan;
+      updateBreadcrumb(kecamatan);
+      renderDesaList(kecamatan);
+    }
+
+    function updateBreadcrumb(kecamatan = null) {
+      const breadcrumbElement = document.getElementById('breadcrumb');
+      if (kecamatan) {
+        breadcrumbElement.innerHTML = `
+          <i class="fas fa-home"></i> Kabupaten Kediri 
+          <i class="fas fa-chevron-right"></i> 
+          <span class="current-location">${kecamatan}</span>
+        `;
+      } else {
+        breadcrumbElement.innerHTML = `
+          <i class="fas fa-home"></i> Kabupaten Kediri
+        `;
+      }
+    }
 
     function renderKecamatanList(data, filter = '') {
-      const container = document.getElementById('kecamatanContainer');
-      const desaContainer = document.getElementById('desaContainer');
-      const searchDesa = document.getElementById('searchDesa');
-      desaContainer.innerHTML = '';
-      searchDesa.style.display = 'none';
-
       const kecamatans = [...new Set(data.map(row => row.Kecamatan))]
-        .filter(kec => kec.toLowerCase().includes(filter.toLowerCase()));
+        .filter(kec => kec && kec.toLowerCase().includes(filter.toLowerCase()))
+        .sort();
 
-      container.innerHTML = '<h2>Pilih Kecamatan:</h2>';
-      kecamatans.forEach(kec => {
-        const btn = document.createElement('button');
-        btn.textContent = kec;
-        btn.className = 'button';
-        btn.onclick = () => {
-          currentKecamatan = kec;
-          renderDesaList(kec);
-        };
-        container.appendChild(btn);
+      filteredKecamatans = kecamatans;
+
+      if (kecamatans.length === 0) {
+        kecamatanContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>Tidak ada kecamatan ditemukan</h3>
+            <p>Coba gunakan kata kunci yang berbeda</p>
+          </div>
+        `;
+        return;
+      }
+
+      kecamatanContainer.innerHTML = '';
+      kecamatans.forEach((kec, index) => {
+        const desaCount = data.filter(row => row.Kecamatan === kec).length;
+        
+        const card = document.createElement('div');
+        card.className = 'card fade-in';
+        card.style.animationDelay = `${index * 0.1}s`;
+        
+        card.innerHTML = `
+          <div class="card-title">
+            <i class="fas fa-map-marker-alt card-icon"></i>
+            ${kec}
+            <span class="count-badge">${desaCount}</span>
+          </div>
+          <div class="card-subtitle">
+            ${desaCount} desa tersedia
+          </div>
+          <button class="btn btn-primary" onclick="showDesaSection('${kec}')">
+            <i class="fas fa-arrow-right"></i>
+            Lihat Desa
+          </button>
+        `;
+        
+        kecamatanContainer.appendChild(card);
       });
     }
 
     function renderDesaList(kecamatan, filter = '') {
-      const desaContainer = document.getElementById('desaContainer');
-      const searchDesa = document.getElementById('searchDesa');
-      searchDesa.style.display = 'block';
-      searchDesa.value = '';
-
-      desaContainer.innerHTML = `<h2>Desa di Kecamatan ${kecamatan}:</h2>`;
-
       const desaList = data
-        .filter(row => row.Kecamatan === kecamatan && row.Desa.toLowerCase().includes(filter.toLowerCase()));
+        .filter(row => row.Kecamatan === kecamatan && 
+                      row.Desa && 
+                      row.Desa.toLowerCase().includes(filter.toLowerCase()))
+        .sort((a, b) => a.Desa.localeCompare(b.Desa));
 
-      desaList.forEach(row => {
-        const btn = document.createElement('button');
-        btn.textContent = row.Desa;
-        btn.className = 'button';
-        btn.onclick = () => window.open(row.Link, '_blank');
-        desaContainer.appendChild(btn);
+      filteredDesas = desaList;
+
+      if (desaList.length === 0) {
+        desaContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>Tidak ada desa ditemukan</h3>
+            <p>Coba gunakan kata kunci yang berbeda</p>
+          </div>
+        `;
+        return;
+      }
+
+      desaContainer.innerHTML = '';
+      desaList.forEach((row, index) => {
+        const card = document.createElement('div');
+        card.className = 'card fade-in';
+        card.style.animationDelay = `${index * 0.1}s`;
+        
+        card.innerHTML = `
+          <div class="card-title">
+            <i class="fas fa-building card-icon"></i>
+            ${row.Desa}
+          </div>
+          <div class="card-subtitle">
+            Kecamatan ${kecamatan}
+          </div>
+          <button class="btn btn-success" onclick="window.open('${row.Link}', '_blank')">
+            <i class="fas fa-external-link-alt"></i>
+            Akses Data RTLH
+          </button>
+        `;
+        
+        desaContainer.appendChild(card);
       });
     }
 
-    document.getElementById('searchKecamatan').addEventListener('input', function () {
+    // Event Listeners
+    searchKecamatan.addEventListener('input', function() {
       renderKecamatanList(data, this.value);
     });
 
-    document.getElementById('searchDesa').addEventListener('input', function () {
+    searchDesa.addEventListener('input', function() {
       renderDesaList(currentKecamatan, this.value);
     });
 
-    // LOAD DATA CSV
-    fetch('data.csv')
-      .then(response => response.text())
-      .then(csv => {
-        Papa.parse(csv, {
+    backButton.addEventListener('click', showKecamatanSection);
+
+    // Load CSV Data
+    async function loadData() {
+      showLoading();
+      
+      try {
+        // Coba load data dari file yang diupload
+        const csvContent = await window.fs.readFile('data all.csv', { encoding: 'utf8' });
+        
+        Papa.parse(csvContent, {
           header: true,
           skipEmptyLines: true,
-          complete: function (results) {
-            data = results.data;
+          complete: function(results) {
+            data = results.data.filter(row => row.Kecamatan && row.Desa && row.Link);
+            console.log(`✅ Data berhasil dimuat: ${data.length} entries`);
+            console.log('Sample data:', data.slice(0, 3));
+            hideLoading();
             renderKecamatanList(data);
+          },
+          error: function(error) {
+            console.error('Papa Parse error:', error);
+            showError('Error parsing CSV data');
           }
         });
-      })
-      .catch(error => {
-        console.error("Gagal memuat data.csv:", error);
-        document.body.innerHTML += '<p style="color:red;">Gagal memuat data.csv. Pastikan Anda membuka ini dari server lokal.</p>';
-      });
+        
+      } catch (error) {
+        console.error('File read error:', error);
+        
+        // Fallback: coba fetch dari server
+        try {
+          const response = await fetch('data.csv');
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const csv = await response.text();
+          
+          Papa.parse(csv, {
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+              data = results.data.filter(row => row.Kecamatan && row.Desa && row.Link);
+              hideLoading();
+              renderKecamatanList(data);
+            },
+            error: function(error) {
+              console.error('Papa Parse error:', error);
+              showError('Error parsing CSV data');
+            }
+          });
+          
+        } catch (fetchError) {
+          console.error('Fetch error:', fetchError);
+          showError('Data tidak ditemukan. Pastikan file "data all.csv" tersedia atau server berjalan dengan file "data.csv".');
+        }
+      }
+    }
+
+    function showError(message) {
+      hideLoading();
+      mainContent.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-exclamation-triangle" style="color: #ef4444;"></i>
+          <h3>Gagal Memuat Data</h3>
+          <p>${message}</p>
+          <button class="btn btn-primary mt-4" onclick="location.reload()">
+            <i class="fas fa-redo"></i>
+            Coba Lagi
+          </button>
+        </div>
+      `;
+      mainContent.classList.remove('hidden');
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateBreadcrumb(); // Initialize breadcrumb
+      loadData();
+    });
   </script>
 </body>
 </html>
