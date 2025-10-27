@@ -785,7 +785,7 @@
       
       try {
         // Coba load data dari file yang diupload
-        const csvContent = await window.fs.readFile('data all.csv', { encoding: 'utf8' });
+        const csvContent = await window.fs.readFile('Daftar_Link_3.csv', { encoding: 'utf8' });
         
         Papa.parse(csvContent, {
           header: true,
@@ -808,7 +808,7 @@
         
         // Fallback: coba fetch dari server
         try {
-          const response = await fetch('data.csv');
+          const response = await fetch('Daftar_Link_3.csv');
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
@@ -830,7 +830,7 @@
           
         } catch (fetchError) {
           console.error('Fetch error:', fetchError);
-          showError('Data tidak ditemukan. Pastikan file "data all.csv" tersedia atau server berjalan dengan file "data.csv".');
+          showError('Data tidak ditemukan. Pastikan file "Daftar_Link_3.csv" tersedia atau server berjalan dengan file "Daftar_Link_3.csv".');
         }
       }
     }
