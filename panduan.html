@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panduan Penggunaan - DATA RTLH KAB KEDIRI</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary-color: #f1f5f9;
+      --accent-color: #06b6d4;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border-color: #e2e8f0;
+      --white: #ffffff;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, var(--gray-50) 0%, var(--secondary-color) 100%);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+      padding-bottom: 4rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 2rem 0 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: var(--white);
+      margin-bottom: 2rem;
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-success {
+      background: var(--success-color);
+      color: var(--white);
+    }
+
+    .btn-success:hover {
+      background: #059669;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .content-card h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .content-card h3 {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-card p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .content-card ul, .content-card ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .content-card li {
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    /* Steps */
+    .step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--primary-color);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .step-content h4 {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .step-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* Alert Boxes */
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .alert-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .alert-info {
+      background: #dbeafe;
+      border-left: 4px solid #3b82f6;
+      color: #1e40af;
+    }
+
+    .alert-warning {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      color: #92400e;
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      border-left: 4px solid #10b981;
+      color: #065f46;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: var(--gray-50);
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .faq-answer {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: linear-gradient(135deg, var(--success-color), #059669);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-card h3 {
+      color: var(--white);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .contact-card p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-whatsapp {
+      background: var(--white);
+      color: var(--success-color);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--gray-50);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    .footer-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 768px) {
+      .content-card {
+        padding: 1.5rem;
+      }
+
+      .step {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container">
+      <h1><i class="fas fa-book-open"></i> Panduan Penggunaan</h1>
+      <p>Aplikasi Database RTLH Kabupaten Kediri</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="nav-buttons">
+      <a href="index.html" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+      </a>
+      <a href="https://wa.me/6285645719632?text=Halo,%20saya%20memerlukan%20bantuan%20terkait%20aplikasi%20RTLH" class="btn btn-success" target="_blank">
+        <i class="fab fa-whatsapp"></i> Hubungi Admin
+      </a>
+    </div>
+
+    <!-- Pengenalan -->
+    <div class="content-card">
+      <h2><i class="fas fa-info-circle"></i> Tentang Aplikasi</h2>
+      <p>
+        Aplikasi Database RTLH (Rumah Tidak Layak Huni) Kabupaten Kediri adalah platform digital yang memudahkan 
+        akses data rumah tidak layak huni di seluruh wilayah Kabupaten Kediri. Aplikasi ini menyediakan akses cepat 
+        ke data spreadsheet Google Sheets yang tersimpan secara terorganisir berdasarkan Kecamatan dan Desa.
+      </p>
+      
+      <div class="alert alert-info">
+        <i class="fas fa-lightbulb alert-icon"></i>
+        <div>
+          <strong>Tip:</strong> Aplikasi ini dirancang untuk memudahkan pencarian dan akses data RTLH tanpa perlu 
+          mengingat link atau mencari file satu per satu.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cara Penggunaan -->
+    <div class="content-card">
+      <h2><i class="fas fa-graduation-cap"></i> Cara Menggunakan Aplikasi</h2>
+      
+      <h3><i class="fas fa-search"></i> Mencari Data Berdasarkan Kecamatan</h3>
+      
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Buka Halaman Utama</h4>
+          <p>Pada halaman utama, Anda akan melihat daftar semua Kecamatan yang tersedia di Kabupaten Kediri.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Gunakan Fitur Pencarian (Opsional)</h4>
+          <p>Ketik nama Kecamatan di kolom pencarian untuk memfilter daftar dan menemukan Kecamatan yang Anda cari dengan cepat.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Pilih Kecamatan</h4>
+          <p>Klik tombol "Lihat Desa" pada kartu Kecamatan yang ingin Anda akses. Setiap kartu menampilkan jumlah desa yang tersedia.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Pilih Desa</h4>
+          <p>Setelah memilih Kecamatan, Anda akan melihat daftar Desa. Gunakan pencarian jika diperlukan, lalu klik "Akses Data RTLH".</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h4>Akses Google Sheets</h4>
+          <p>Link akan membuka Google Sheets di tab baru. Pastikan Anda sudah login ke akun Google yang memiliki akses.</p>
+        </div>
+      </div>
+
+      <div class="alert alert-success">
+        <i class="fas fa-check-circle alert-icon"></i>
+        <div>
+          <strong>Berhasil!</strong> Anda sekarang dapat melihat dan mengolah data RTLH untuk desa yang dipilih.
+        </div>
+      </div>
+    </div>
+
+    <!-- Fitur Aplikasi -->
+    <div class="content-card">
+      <h2><i class="fas fa-star"></i> Fitur-Fitur Aplikasi</h2>
+      
+      <h3><i class="fas fa-search"></i> Pencarian Cepat</h3>
+      <p>
+        Fitur pencarian tersedia di setiap halaman untuk memudahkan Anda menemukan Kecamatan atau Desa yang dicari 
+        tanpa harus scroll panjang.
+      </p>
+
+      <h3><i class="fas fa-map-marked-alt"></i> Navigasi Breadcrumb</h3>
+      <p>
+        Breadcrumb di bagian atas menunjukkan posisi Anda saat ini (Kabupaten → Kecamatan → Desa) sehingga Anda 
+        tidak bingung saat navigasi.
+      </p>
+
+      <h3><i class="fas fa-mobile-alt"></i> Responsive Design</h3>
+      <p>
+        Aplikasi dapat diakses dengan baik dari perangkat apapun: komputer, tablet, atau smartphone. Tampilan akan 
+        menyesuaikan dengan ukuran layar Anda.
+      </p>
+
+      <h3><i class="fas fa-external-link-alt"></i> Akses Langsung ke Google Sheets</h3>
+      <p>
+        Setiap Desa terhubung langsung ke Google Sheets yang berisi data RTLH. Anda akan dibawa ke spreadsheet 
+        yang tepat dengan satu klik.
+      </p>
+
+      <h3><i class="fas fa-arrow-left"></i> Tombol Kembali</h3>
+      <p>
+        Gunakan tombol "Kembali ke Daftar Kecamatan" untuk kembali ke halaman utama tanpa harus menggunakan tombol 
+        back browser.
+      </p>
+    </div>
+
+    <!-- Tips & Trik -->
+    <div class="content-card">
+      <h2><i class="fas fa-magic"></i> Tips & Trik</h2>
+      
+      <ul>
+        <li>
+          <strong>Gunakan Keyboard:</strong> Tekan <kbd>Ctrl + F</kbd> atau <kbd>Cmd + F</kbd> untuk pencarian cepat 
+          di halaman browser.
+        </li>
+        <li>
+          <strong>Bookmark Halaman:</strong> Simpan halaman ini sebagai bookmark di browser untuk akses cepat di masa 
+          mendatang.
+        </li>
+        <li>
+          <strong>Akses Offline:</strong> Setelah dibuka sekali, beberapa elemen aplikasi akan di-cache sehingga 
+          loading lebih cepat pada kunjungan berikutnya.
+        </li>
+        <li>
+          <strong>Share Link:</strong> Anda dapat membagikan link halaman ini ke rekan kerja yang membutuhkan akses 
+          ke data RTLH.
+        </li>
+        <li>
+          <strong>Login Google:</strong> Pastikan Anda sudah login ke akun Google yang memiliki akses ke spreadsheet 
+          sebelum mengklik tombol "Akses Data RTLH".
+        </li>
+      </ul>
+
+      <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle alert-icon"></i>
+        <div>
+          <strong>Perhatian:</strong> Jika Anda tidak memiliki akses ke Google Sheets, hubungi admin untuk 
+          mendapatkan permission.
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="content-card">
+      <h2><i class="fas fa-question-circle"></i> Pertanyaan yang Sering Diajukan (FAQ)</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <i class="fas fa-chevron-right" style="font-size: 0.9rem; color: var(--accent-color);"></i>
+          Bagaimana jika saya tidak bisa membuka Google Sheets?
+        </div>
+        <div class="faq-answer">
+          Pastikan Anda sudah login ke akun Google dan memiliki permission untuk mengakses spreadsheet tersebut. 
+          Jika masih bermasalah, hubungi admin untuk mendapatkan akses.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <i class="fas fa-chevron-right" style="font-size: 0.9rem; color: var(--accent-color);"></i>
+          Apakah saya bisa mengedit data di Google Sheets?
+        </div>
+        <div class="faq-answer">
+          Hak edit tergantung pada permission yang diberikan oleh pemilik spreadsheet. Jika Anda memerlukan akses 
+          edit, hubungi admin untuk pengaturan permission.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <i class="fas fa-chevron-right" style="font-size: 0.9rem; color: var(--accent-color);"></i>
+          Data untuk Desa tertentu tidak muncul, kenapa?
+        </div>
+        <div class="faq-answer">
+          Kemungkinan data untuk desa tersebut belum diinput ke dalam database atau sedang dalam proses pembaruan. 
+          Hubungi admin untuk informasi lebih lanjut.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <i class="fas fa-chevron-right" style="font-size: 0.9rem; color: var(--accent-color);"></i>
+          Apakah aplikasi ini memerlukan koneksi internet?
+        </div>
+        <div class="faq-answer">
+          Ya, aplikasi ini memerlukan koneksi internet untuk mengakses Google Sheets. Namun, interface aplikasi 
+          dapat di-cache oleh browser untuk loading yang lebih cepat.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <i class="fas fa-chevron-right" style="font-size: 0.9rem; color: var(--accent-color);"></i>
+          Bagaimana cara mendapatkan data dalam format lain (Excel, PDF)?
+        </div>
+        <div class="faq-answer">
+          Anda dapat mengunduh data dari Google Sheets dengan menu File → Download dan memilih format yang 
+          diinginkan (Excel, PDF, CSV, dll).
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <i class="fas fa-chevron-right" style="font-size: 0.9rem; color: var(--accent-color);"></i>
+          Siapa yang dapat saya hubungi untuk bantuan teknis?
+        </div>
+        <div class="faq-answer">
+          Hubungi admin melalui tombol WhatsApp yang tersedia di halaman ini atau di halaman utama untuk bantuan 
+          dan konfirmasi pengerjaan.
+        </div>
+      </div>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div class="content-card">
+      <h2><i class="fas fa-tools"></i> Troubleshooting</h2>
+      
+      <h3><i class="fas fa-exclamation-circle"></i> Masalah Umum dan Solusinya</h3>
+      
+      <div style="margin-top: 1rem;">
+        <strong style="color: var(--text-primary);">Problem: Halaman tidak loading</strong>
+        <ul>
+          <li>Cek koneksi internet Anda</li>
+          <li>Refresh halaman dengan <kbd>Ctrl + R</kbd> atau <kbd>Cmd + R</kbd></li>
+          <li>Clear cache browser dan coba lagi</li>
+          <li>Coba gunakan browser yang berbeda</li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 1rem;">
+        <strong style="color: var(--text-primary);">Problem: Link Google Sheets tidak bisa dibuka</strong>
+        <ul>
+          <li>Pastikan Anda sudah login ke Google Account</li>
+          <li>Cek apakah Anda memiliki permission untuk mengakses file</li>
+          <li>Hubungi admin untuk request akses</li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 1rem;">
+        <strong style="color: var(--text-primary);">Problem: Pencarian tidak bekerja</strong>
+        <ul>
+          <li>Pastikan menggunakan browser modern (Chrome, Firefox, Safari, Edge)</li>
+          <li>Enable JavaScript di browser Anda</li>
+          <li>Refresh halaman</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-card">
+      <h3><i class="fas fa-headset"></i> Butuh Bantuan?</h3>
+      <p>
+        Jika Anda mengalami kendala atau membutuhkan bantuan lebih lanjut, jangan ragu untuk menghubungi admin 
+        melalui WhatsApp. Kami siap membantu Anda!
+      </p>
+      <a href="https://wa.me/6285645719632?text=Halo,%20saya%20memerlukan%20bantuan%20terkait%20aplikasi%20RTLH" 
+         class="btn btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <i class="fas fa-code" style="color: var(--primary-color);"></i>
+      Developed by 
+      <a href="https://www.yarif.com/" target="_blank" rel="noopener noreferrer" class="footer-link">
+        Yarif 2025
+      </a>
+      <i class="fas fa-heart" style="color: #ef4444; margin-left: 0.5rem;"></i>
+    </div>
+  </div>
+</body>
+</html>
