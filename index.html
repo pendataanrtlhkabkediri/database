@@ -560,6 +560,33 @@
 
     <!-- Main Content -->
     <div id="mainContent" class="hidden">
+      <!-- Quick Guide Section -->
+      <div style="max-width: 1200px; margin: 0 auto 2rem; padding: 0 1rem;">
+        <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border-left: 4px solid #10b981;">
+          <h2 style="color: #1e293b; font-size: 1.4rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-info-circle" style="color: #10b981;"></i>
+            Panduan Singkat
+          </h2>
+          <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.7;">
+            Selamat datang di Aplikasi Database RTLH Kabupaten Kediri! Untuk mengakses data:
+          </p>
+          <ol style="color: #64748b; margin-left: 1.5rem; margin-bottom: 1.5rem; line-height: 1.8;">
+            <li><strong>Pilih Kecamatan</strong> dari daftar di bawah atau gunakan pencarian</li>
+            <li><strong>Pilih Desa</strong> yang ingin Anda akses datanya</li>
+            <li><strong>Klik tombol "Akses Data RTLH"</strong> untuk membuka Google Sheets</li>
+          </ol>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="panduan.html" class="btn" style="background: #2563eb; color: white; text-decoration: none;">
+              <i class="fas fa-book"></i> Panduan Lengkap
+            </a>
+            <a href="https://wa.me/6285645719632?text=Halo,%20saya%20memerlukan%20bantuan%20terkait%20aplikasi%20RTLH%20Kabupaten%20Kediri" 
+               class="btn" target="_blank" style="background: #10b981; color: white; text-decoration: none;">
+              <i class="fab fa-whatsapp"></i> Bantuan & Konfirmasi
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- Kecamatan Section -->
       <div id="kecamatanSection">
         <div class="search-section">
@@ -590,9 +617,10 @@
             Pilih Kecamatan Lain
           </button>
           
-          <div class="section-info">
-            <small class="text-muted">Klik desa untuk mengakses data RTLH</small>
-          </div>
+          <a href="https://wa.me/6285645719632?text=Halo,%20saya%20memerlukan%20bantuan%20terkait%20aplikasi%20RTLH%20Kabupaten%20Kediri" 
+             class="btn" target="_blank" style="background: #10b981; color: white; text-decoration: none;">
+            <i class="fab fa-whatsapp"></i> Butuh Bantuan?
+          </a>
         </div>
 
         <div class="search-section">
@@ -830,7 +858,7 @@
           
         } catch (fetchError) {
           console.error('Fetch error:', fetchError);
-          showError('Data tidak ditemukan. Pastikan file "Daftar_Link_3.csv" tersedia atau server berjalan dengan file "Daftar_Link_3.csv".');
+          showError('Data tidak ditemukan. Pastikan file "data.csv" tersedia atau server berjalan dengan file "data.csv".');
         }
       }
     }
